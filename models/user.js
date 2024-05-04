@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://nishchalb21:NB5TbGJNdghPRr5E@cluster0.0oavpu3.mongodb.net/miniproject")
+mongoose.connect("mongolink/miniproject")
 
 const userSchema = mongoose.Schema({
     username: { type: String, required: true, unique: true },
