@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <style>
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white">
+    <nav class="bg-gray-800 p-6">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center flex-shrink-0 text-white">
+                <a href="/" class="font-semibold text-xl tracking-tight">My Blog</a>
+            </div>
+            <div class="lg:hidden">
+                <button id="menu-toggle"
+                    class="menu-toggle-btn flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white">
+                    <i class="ri-menu-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="menu-options" class="hidden lg:flex lg:items-center">
+                <a href="/post/create" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
+                    <i class="ri-add-line mr-1"></i>Create Post
+                </a>
+                <a href="/profile" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
+                    <i class="ri-account-circle-line mr-1"></i>Profile
+                </a>
+                <a href="/logout" class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white">
+                    <i class="ri-logout-box-line mr-1"></i>Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuOptions = document.getElementById('menu-options');
+
+        menuToggle.addEventListener('click', () => {
+            menuOptions.classList.toggle('hidden');
+            menuOptions.classList.toggle('flex-col');
+        });
+    </script>
+</body>
+
+</html>

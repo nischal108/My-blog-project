@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-900 text-white">
+    <%-include('navbar')%>
+
+    <div class="container mx-auto py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <% posts.forEach(post=> { %>
+                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <div class="flex items-center justify-between px-3 mt-3">
+
+                        <div> Author : <%= post.author.name%></div>
+                        <div class="  px-3">
+                            <i class="ri-time-line"></i>
+                            <% var timediff=Math.floor((Date.now() - post.timeCreated) / 60000); if (timediff>= 60 && timediff < 1440) {
+                                    timediff=Math.floor(timediff / 60) +" hour"; } else if (timediff>= 1440) {
+                                    timediff = Math.floor(timediff / 60 / 24) + " days";}
+                                    else {
+                                    timediff = timediff+" minutes";}
+                                    %>
+                                    <%= timediff %> ago
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h2 class="text-xl h-6 overflow-hidden font-semibold mb-2">
+                            <%= post.title %>
+                        </h2>
+                        <p class="text-gray-400 h-6 overflow-hidden">
+                            <%= post.description %>
+                        </p>
+
+                        <div class="buttons flex px-6 mt-3 items-center justify-between ">
+                            <a class="hover:text-blue-500" href="/like/<%= post._id %>"><i class="ri-thumb-up-fill"></i> <%= post.likes.length%> Likes</a>
+                            <% if (userId == post.author._id)  { %> 
+                            <a class="text-grey-700" href="/edit/<%= post._id %>"><i class="ri-pencil-fill"></i>
+                                Edit</a>
+                            <a class="text-red-500" href="/delete/<%= post._id %>"><i class="ri-delete-bin-fill"></i>
+                                Delete</a>
+                            <% } %>
+                        </div>
+                       
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+</body>
+
+</html>
