@@ -6,6 +6,7 @@ const path = require('path');
 const ejs = require('ejs');
 const userModel = require("./models/user");
 const postModel = require("./models/post");
+const multerconfig = require("./config/multerconfig");
 
 const app = express();
 const secretKey = process.env.SECRET_KEY || "HELLO";
@@ -15,7 +16,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware to check if user is logged in
 async function isLoggedIn(req, res, next) {
@@ -38,7 +39,7 @@ app.get("/", async (req, res) => {
     try {
         const allPosts = await postModel.find({}).populate('author');
         if (!allPosts || allPosts.length === 0) {
-            return res.redirect('/register');
+            return res.redirect('/post/create');
         }
         
         const token = req.cookies.token;
@@ -211,6 +212,22 @@ app.get("/delete/:id", async(req,res)=>{
         res.status(500).send("Internal server error");
     }
 });
+
+
+//upload profile pic
+
+app.get('/profile/update',(req,res)=>{
+    res.render("profilepic")
+})
+
+
+app.post('/uploadprofile',isLoggedIn,multerconfig.single("profilepic"),async (req,res)=>{
+   let user = await userModel.findOne({_id:req.userId});
+   user.profilepic = req.file.filename;
+   await user.save();
+   res.redirect("/profile");
+})
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

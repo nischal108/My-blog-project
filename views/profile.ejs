@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-900 text-white">
     <%-include('navbar')%>
         <div class="container mx-auto py-10">
-            <h1 class="text-xl text-green-300 mb-6 font-bold">User Profile</h1>
-            <div class="max-w-md mx-auto bg-gray-800 rounded-lg p-6">
+            <h1 class="text-xl text-green-300 mb-3 font-bold">User Profile</h1>
+            <h5 class="flex flex-row-reverse underline cursor-pointer text-green-300"> <a href="/profile/update">Upload profile picture </a></h5>
+            <div class="max-w-md mx-auto bg-gray-800 rounded-lg p-3 flex items-center justify-center flex-col">
+                <div class="w-32 h-32 rounded-full mb-3 overflow-hidden border-4 border-green-500">
+                    <img class="w-full h-full object-center object-cover" src="/images/uploads/<%=user.profilepic%>" alt="">
+                </div>
                 <p><strong>Username:</strong>
                     <%= user.username %>
                 </p>
